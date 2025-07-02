@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="form-container">
+        <form method="POST" action="{{ url_for('employer.post_job') }}" id="postJobForm">
+            <fieldset>
+                <legend><h2>Post a New Job</h2></legend>
+                <div class="form-group">
+                    <label for="title">Job Title</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Job Description</label>
+                    <textarea id="description" name="description" rows="5" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" name="location" required>
+                </div>
+                <div class="form-group">
+                    <label for="job_type">Job Type</label>
+                    <select id="job_type" name="job_type" class="form-control">
+                        <option>Full-time</option>
+                        <option>Part-time</option>
+                        <option>Contract</option>
+                        <option>Internship</option>
+                        <option>Temporary</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="salary">Salary (e.g., $50,000 - $70,000 per year)</label>
+                    <input type="text" id="salary" name="salary">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Post Job</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+{% endblock content %} 

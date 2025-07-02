@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="dashboard-header">
+        <h1>Applicants for "{{ job.title }}"</h1>
+        <a href="{{ url_for('employer.employer_dashboard') }}" class="btn">&larr; Back to Dashboard</a>
+    </div>
+
+    {% if applicants %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for applicant in applicants %}
+                    <tr>
+                        <td>{{ applicant.username }}</td>
+                        <td>{{ applicant.email }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>There are no applicants for this job yet.</p>
+    {% endif %}
+{% endblock content %} 

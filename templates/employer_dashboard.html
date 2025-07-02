@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="dashboard-header">
+        <h1>Employer Dashboard</h1>
+        <p>Manage your job postings here.</p>
+    </div>
+
+    <h2>Your Job Listings</h2>
+    <a href="{{ url_for('employer.post_job') }}" class="btn btn-primary" style="margin-bottom: 1rem;">Post a New Job</a>
+
+    {% if jobs %}
+        {% for job in jobs %}
+            <div class="job-listing">
+                <h3>{{ job.title }}</h3>
+                <div class="job-meta">
+                    <span>Posted on: {{ job.date_posted.strftime('%Y-%m-%d') }}</span>
+                </div>
+                <div>
+                    <a href="{{ url_for('employer.view_applicants', job_id=job.id) }}" class="btn">View Applicants ({{ job.applications|length }})</a>
+                    <form action="{{ url_for('employer.delete_job', job_id=job.id) }}" method="POST" style="display: inline;" class="confirm-delete">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>You have not posted any jobs yet.</p>
+    {% endif %}
+{% endblock content %} 

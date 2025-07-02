@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="dashboard-header">
+        <h1>Admin Dashboard</h1>
+        <p>Manage users and job listings across the platform.</p>
+    </div>
+
+    <h2>Manage Users</h2>
+    {% if users %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.role }}</td>
+                        <td>
+                            {% if user.role != 'admin' %}
+                                <form action="{{ url_for('admin.delete_user', user_id=user.id) }}" method="POST" class="confirm-delete">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No users found.</p>
+    {% endif %}
+
+    <h2 style="margin-top: 2rem;">Manage Jobs</h2>
+    {% if jobs %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Employer</th>
+                    <th>Date Posted</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for job in jobs %}
+                    <tr>
+                        <td>{{ job.title }}</td>
+                        <td>{{ job.author.username }}</td>
+                        <td>{{ job.date_posted.strftime('%Y-%m-%d') }}</td>
+                        <td>
+                            <form action="{{ url_for('admin.delete_job', job_id=job.id) }}" method="POST" class="confirm-delete">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No jobs posted yet.</p>
+    {% endif %}
+{% endblock content %} 

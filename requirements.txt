@@ -1,0 +1,14 @@
+Flask
+Flask-SQLAlchemy
+Flask-Login
+Flask-Bcrypt
+SQLAlchemy
+Werkzeug
+Jinja2
+itsdangerous
+click
+MarkupSafe
+blinker
+colorama
+greenlet
+Faker 
