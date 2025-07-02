@@ -12,3 +12,4 @@ blinker
 colorama
 greenlet
 Faker 
+gunicorn
